@@ -1,9 +1,12 @@
 package me.stevenpereira.twentyfortyeight;
 
+import me.stevenpereira.twentyfortyeight.core.GameBoardFramework;
+
 /**
  * 2048 Game
  */
 public class TwentyFortyEightGame {
+
     /** Move Direction Enum */
     enum MoveDirection {UP, DOWN, RIGHT, LEFT};
 
@@ -90,7 +93,7 @@ public class TwentyFortyEightGame {
                 GameBoardFramework.moveLeft(gameBoard);
                 break;
             case RIGHT:
-                this.moveRight(gameBoard);
+                GameBoardFramework.moveRight(gameBoard);
                 break;
         }
 
@@ -98,10 +101,6 @@ public class TwentyFortyEightGame {
         GameBoardFramework.addRandomTiles(this.getGameBoard(), 1);
     }
 
-
-    private void moveRight(int[][] gameBoard) {
-
-    }
 
     public void printGameBoard(int[][] gameBoard) {
        if (gameBoard != null) {
