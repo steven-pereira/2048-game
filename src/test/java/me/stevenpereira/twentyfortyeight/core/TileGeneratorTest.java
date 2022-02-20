@@ -28,12 +28,10 @@ public class TileGeneratorTest {
         assertEquals(expectedTilesFound, actualTilesFound);
     }
 
-    @Test
-    public void addRandomTileOnFullBoardTest() {
-        int[][] gameBoard = new GameBoardTestMocks().GAME_BOARD_FULL_NO_MOVES;
-
-        TileGenerator.addRandomTiles(gameBoard, 1);
-
-
-    }
+//    @Test
+//    public void addRandomTileOnFullBoardTest() {
+//        int[][] gameBoard = new GameBoardTestMocks().GAME_BOARD_FULL_NO_MOVES;
+//
+//        TileGenerator.addRandomTiles(gameBoard, 1);
+//    }
 }
