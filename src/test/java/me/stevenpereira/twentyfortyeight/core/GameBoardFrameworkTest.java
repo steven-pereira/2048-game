@@ -1,7 +1,6 @@
 package me.stevenpereira.twentyfortyeight.core;
 
 import me.stevenpereira.twentyfortyeight.TwentyFortyEightGame;
-import me.stevenpereira.twentyfortyeight.core.GameBoardFramework;
 import org.junit.Before;
 import org.junit.Test;
 

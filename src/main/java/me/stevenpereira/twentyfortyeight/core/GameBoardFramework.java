@@ -1,44 +1,19 @@
 package me.stevenpereira.twentyfortyeight.core;
 
-import java.util.Random;
-
 public class GameBoardFramework {
 
-    /** Possible tile sizes - used for random value generator */
-    public static final int[] POSSIBLE_TILE_SIZES = new int[]{2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048};
-
     /**
-     * Utility method to add N number of random tiles to the board.
+     * Adds the specified 'n' number of random tiles to the gameBoard.
      *
-     * TODO: Currently keeps going if it doesn't find an open space
-     * TODO: Needs to not check if there's no open spaces
+     * First checks to make sure there is enough open spaces on the game board
+     * before attempting to randomly find spaces and add them.
+     *
      * @param gameBoard
      * @param numberOfTiles
      */
     public static void addRandomTiles(int[][] gameBoard, int numberOfTiles) {
-        Random random = new Random();
-        boolean uniqueTilesSet = false;
-
-        if (numberOfTiles > 0) {
-            for (int i = 0; i < numberOfTiles || uniqueTilesSet; i++) {
-                // Find random x position
-                int xPosition = random.nextInt(gameBoard.length);
-
-                // Find random y position
-                int yPosition = random.nextInt(gameBoard.length);
-
-                // Find random tile Number - needs to be based on level TODO - level context
-                int tileValue = POSSIBLE_TILE_SIZES[random.nextInt(2)];
-
-                if (gameBoard[xPosition][yPosition] != 0) {
-                    uniqueTilesSet = true;
-                    continue;
-                } else {
-                    // Set tile
-                    gameBoard[xPosition][yPosition] = tileValue;
-                    uniqueTilesSet = false;
-                }
-            }
+        if (getAvailableFreeSpacesCount(gameBoard) >= numberOfTiles) {
+            TileGenerator.addRandomTiles(gameBoard, numberOfTiles);
         }
     }
 
@@ -49,7 +24,7 @@ public class GameBoardFramework {
             // First need to remove spaces by shifting down
             shiftDown(gameBoard, i);
 
-            // Iterate through the indiviual column starting at the bottom
+            // Iterate through the individual column starting at the bottom
             for (int j = 0; j < gameBoard[i].length - 1; j++) {
                 int tileValue1 = gameBoard[i][j];
                 int tileValue2 = gameBoard[i][j + 1];
@@ -74,7 +49,7 @@ public class GameBoardFramework {
             // First need to remove spaces by shifting down
             shiftUp(gameBoard, i);
 
-            // Iterate through the indiviual column starting at the bottom
+            // Iterate through the individual column starting at the bottom
             for (int j = gameBoard[i].length - 1; j > 0; j--) {
                 int tileValue1 = gameBoard[i][j];
                 int tileValue2 = gameBoard[i][j - 1];
@@ -99,7 +74,7 @@ public class GameBoardFramework {
             // First need to remove spaces by shifting down
             shiftLeft(gameBoard, i);
 
-            // Iterate through the indiviual column starting at the bottom
+            // Iterate through the individual column starting at the bottom
             for (int j = 0; j < gameBoard[i].length - 1; j++) {
                 int tileValue1 = gameBoard[j][i];
                 int tileValue2 = gameBoard[j + 1][i];
@@ -124,7 +99,7 @@ public class GameBoardFramework {
             // First need to remove spaces by shifting down
             shiftRight(gameBoard, i);
 
-            // Iterate through the indiviual column starting at the bottom
+            // Iterate through the individual column starting at the bottom
             for (int j = gameBoard[i].length - 1; j > 0; j--) {
                 int tileValue1 = gameBoard[j][i];
                 int tileValue2 = gameBoard[j - 1][i];
@@ -222,6 +197,62 @@ public class GameBoardFramework {
                 }
             }
         }
+    }
+
+    /**
+     * Checks whether the gameBoard is full, meaning every
+     * available space has a tile already there.
+     *
+     * Note that the gameBoard being full is not the same as
+     * having an 'available move'.
+     *
+     * @param gameBoard
+     * @return
+     */
+    public static boolean isGameBoardFull(int[][] gameBoard) {
+        return getAvailableFreeSpacesCount(gameBoard) < 1;
+    }
+
+    /**
+     * Scans the gameBoard and returns the number of available
+     * free spaces.
+     * @param gameBoard
+     * @return Count of available free spaces.
+     */
+    public static int getAvailableFreeSpacesCount(int[][] gameBoard) {
+        if (gameBoard == null) {
+            return 0;
+        }
+
+        int freeSpaceCount = 0;
+
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[i].length; j++) {
+                if (gameBoard[i][j] == 0) {
+                    freeSpaceCount++;
+                }
+            }
+        }
+
+        return freeSpaceCount;
+    }
+
+    /**
+     * Checks to see if there's any moves to be made, so that we can
+     * figure out if it's game over.
+     * @param gameBoard
+     * @return
+     */
+    public static boolean isMoveAvailable(int[][] gameBoard) {
+        // TODO - Still needs an implementation
+        // Check Horizontal Moves
+
+
+
+        // Check Vertical Moves
+
+
+        return true;
     }
 
     public static void printGameBoard(int[][] gameBoard) {
