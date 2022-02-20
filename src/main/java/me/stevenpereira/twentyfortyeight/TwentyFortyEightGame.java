@@ -67,18 +67,6 @@ public class TwentyFortyEightGame {
         return this.gameStatus;
     }
 
-    /**
-     * Checks to see if there's any moves to be made, so that we can
-     * figure out if it's game over.
-     * @param gameBoard
-     * @return
-     */
-    public boolean isMoveAvailable(int[][] gameBoard) {
-        //TODO
-
-
-        return true;
-    }
 
     public void move(int[][] gameBoard, MoveDirection moveDirection) {
 
@@ -97,8 +85,14 @@ public class TwentyFortyEightGame {
                 break;
         }
 
-        // Add one more random tile
-        GameBoardFramework.addRandomTiles(this.getGameBoard(), 1);
+        // Check if game is lost
+        if (!GameBoardFramework.isMoveAvailable(this.getGameBoard())) {
+            this.endGameInLoss();
+        }
+        // Game is still active
+        else {
+            GameBoardFramework.addRandomTiles(this.getGameBoard(), 1);
+        }
     }
 
 
@@ -106,5 +100,9 @@ public class TwentyFortyEightGame {
        if (gameBoard != null) {
            GameBoardFramework.printGameBoard(gameBoard);
        }
+    }
+
+    private void endGameInLoss() {
+        this.gameStatus = GameStatus.LOSS;
     }
 }
