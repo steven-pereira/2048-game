@@ -1,0 +1,14 @@
+.gameboard {
+  position: absolute;
+  z-index: 1;
+}
+
+.gameboard-row {
+  margin-bottom: 15px;
+}
+
+.gameboard-row:after {
+  content: "";
+  display: block;
+  clear: both;
+}
