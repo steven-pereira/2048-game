@@ -1,0 +1,12 @@
+.gameboard-cell {
+  width: 106.25px;
+  height: 106.25px;
+  margin-right: 15px;
+  float: left;
+  border-radius: 3px;
+  background: rgba(231, 231, 231, 0.568);
+}
+
+.gameboard-cell:last-child {
+  margin-right: 15px;
+}
